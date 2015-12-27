@@ -1,0 +1,43 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="exhibition-selector">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    </style>
+    <paper-dropdown-menu label="Exposition">
+      <paper-menu class="dropdown-content">
+        <template is="dom-repeat" items="{{items}}">
+          <paper-item>{{item}}</paper-item>
+        </template>
+      </paper-menu>
+    </paper-dropdown-menu>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'exhibition-selector',
+      properties: {
+        items: {
+          type: Array,
+          notify: true,
+        }
+      },
+      ready: function() {
+        this.items = [
+          'Conversations électriques',
+          'Art by telephone... recalled',
+          'Dernières nouvelles de l\'éther',
+          'Une lettre arrive toujours à destinations',
+          'Global snapshot - Instantanés d\'un paysage de l\'information',
+          'His master\'s voice',
+          'Anatomie de l\'automate'
+        ];
+      }
+    });
+  })();
+  </script>
+</dom-module>

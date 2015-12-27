@@ -1,0 +1,60 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="artist-selector">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    paper-typeahead-input {
+    --paper-input-container-input: {
+      font-size: 130%;
+    };}
+    </style>
+    <paper-typeahead-input local-candidates="{{items}}" placeholder="Artiste"></paper-typeahead-input>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'artist-selector',
+      properties: {
+        items: {
+          type: Array,
+          notify: true,
+        }
+      },
+      ready: function() {
+        this.items = ['Eric Baudart',
+          'Thomas Bayrle',
+          'Erick Beltran',
+          'Georges-Alexandre Chicotot',
+          'Philippe Decrauzat',
+          'Harun Farocki',
+          'Lauren Huret',
+          'Konrad Klapheck',
+          'Eva Kotátková',
+          'Tetsumi Kudo',
+          'Selma Lepart',
+          'Benoît Maire',
+          'Nathaniel Mellors',
+          'Anita Molinero',
+          'Laurent Montaron',
+          'Matt Mullican',
+          'Jean Perdrizet',
+          'Thomas Ruff',
+          'Markus Schinwald',
+          'Alain Séchas',
+          'Thomas Struth',
+          'Paul Thek',
+          'Patrick Tresset',
+          'Francisco Tropa',
+          'Tatiana Trouvé',
+          'Ulla von Brandenburg',
+          'Christopher Williams'
+        ];
+      }
+    });
+  })();
+  </script>
+</dom-module>
