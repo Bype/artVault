@@ -5,55 +5,22 @@
     :host {
       display: block;
     }
+    
     paper-typeahead-input {
-    --paper-input-container-input: {
-      font-size: 130%;
-    };}
+      --paper-input-container-input: {
+        font-size: 130%;
+      }
+      ;
+    }
     </style>
-    <paper-typeahead-input local-candidates="{{items}}" placeholder="Artiste"></paper-typeahead-input>
+    <paper-typeahead-input prefetch-url="../../bower_components/paper-typeahead-input/statesInObjects.json" max-suggestions="5" label="States in JSON object" display-prop="name" searchable-props="{{searchable}}" is-candidates-json="true" placeholder="Search for US states by state name or state nickname">
+    </paper-typeahead-input>
   </template>
   <script>
   (function() {
     'use strict';
-
     Polymer({
       is: 'artist-selector',
-      properties: {
-        items: {
-          type: Array,
-          notify: true,
-        }
-      },
-      ready: function() {
-        this.items = ['Eric Baudart',
-          'Thomas Bayrle',
-          'Erick Beltran',
-          'Georges-Alexandre Chicotot',
-          'Philippe Decrauzat',
-          'Harun Farocki',
-          'Lauren Huret',
-          'Konrad Klapheck',
-          'Eva Kotátková',
-          'Tetsumi Kudo',
-          'Selma Lepart',
-          'Benoît Maire',
-          'Nathaniel Mellors',
-          'Anita Molinero',
-          'Laurent Montaron',
-          'Matt Mullican',
-          'Jean Perdrizet',
-          'Thomas Ruff',
-          'Markus Schinwald',
-          'Alain Séchas',
-          'Thomas Struth',
-          'Paul Thek',
-          'Patrick Tresset',
-          'Francisco Tropa',
-          'Tatiana Trouvé',
-          'Ulla von Brandenburg',
-          'Christopher Williams'
-        ];
-      }
     });
   })();
   </script>

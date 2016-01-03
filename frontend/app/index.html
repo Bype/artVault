@@ -111,10 +111,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <paper-material elevation="1">
                 <h1>Ajouter une oeuvre</h1>
                 <form is="iron-form" id="artform" method="post" action="/form/newart">
-                  <exhibition-selector></exhibition-selector>
+                  <exhibition-selector name="event" id="event"></exhibition-selector>
                   <paper-input name="title" id="arttitle" required auto-validate error-message="champ obligatoire" label="Titre"></paper-input>
                   <paper-textarea name="description" label="Dimensions, format, matérieaux, durée"></paper-textarea>
-                  <artist-selector></artist-selector>
+                  <paper-typeahead-input id="pti" prefetch-url="http://localhost:3000/api/artists" max-suggestions="5" display-prop="name" searchable-props="{{searchable}}" is-candidates-json="true" placeholder="Artist"></paper-typeahead-input>
                   <paper-input name="date" label="Année" style="width:4em" maxlength="4" auto-validate pattern="[0-9]*" error-message="Nombre"></paper-input>
                   <paper-textarea name="content" label="Description"></paper-textarea>
                   <flickr-selector></flickr-selector>

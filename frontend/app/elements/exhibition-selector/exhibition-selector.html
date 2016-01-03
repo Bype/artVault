@@ -6,10 +6,12 @@
       display: block;
     }
     </style>
+    <iron-ajax auto url="http://localhost:3000/api/events" params='{}' handle-as="json" last-response="{{ajaxResponse}}">
+    </iron-ajax>
     <paper-dropdown-menu label="Exposition">
-      <paper-menu class="dropdown-content">
-        <template is="dom-repeat" items="{{items}}">
-          <paper-item>{{item}}</paper-item>
+      <paper-menu selected="{{value}}" attr-for-selected="value" class="dropdown-content">
+        <template is="dom-repeat" items="[[ajaxResponse]]">
+          <paper-item value="{{item.id}}" role="menuitem">{{item.title}}</paper-item>
         </template>
       </paper-menu>
     </paper-dropdown-menu>
@@ -21,21 +23,9 @@
     Polymer({
       is: 'exhibition-selector',
       properties: {
-        items: {
-          type: Array,
-          notify: true,
-        }
-      },
-      ready: function() {
-        this.items = [
-          'Conversations électriques',
-          'Art by telephone... recalled',
-          'Dernières nouvelles de l\'éther',
-          'Une lettre arrive toujours à destinations',
-          'Global snapshot - Instantanés d\'un paysage de l\'information',
-          'His master\'s voice',
-          'Anatomie de l\'automate'
-        ];
+        value: String,
+        readOnly: true,
+        notify: true
       }
     });
   })();

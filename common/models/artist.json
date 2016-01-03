@@ -1,0 +1,30 @@
+{
+  "name": "artist",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "birth": {
+      "type": "date"
+    },
+    "death": {
+      "type": "date"
+    },
+    "nationality": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
