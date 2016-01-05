@@ -5,12 +5,27 @@
     <style>
     :host {
       display: block;
-      min-height: 150px;
+    }
+    
+    .drop-place {
+      border: 2px dashed grey;
+      margin: auto;
+      @apply(--layout-horizontal);
+      @apply(--layout-wrap);
+      min-height: 160px;
+    }
+    flickr-square {
+      margin: 5px 0 5px 5px;
+      @apply(--layout-vertical);
+      @apply(--layout-center);
+      @apply(--layout-flex-1);
     }
     </style>
-    <div class="horizontal layout">
+    <p class="paper-font-subhead">Glisser / Déposer les images flickr ci-dessous</p>
+    <div class="drop-place layout horizontal">
       <template is="dom-repeat" items="{{images}}">
-        <flickr-square flickrid={{item.id}}></flickr-square>
+        <flickr-square id="{{item.id}}" flickrid="{{item.id}}">
+        </flickr-square>
       </template>
     </div>
   </template>
@@ -20,8 +35,10 @@
     Polymer({
       is: 'flickr-selector',
       properties: {
-        images: Array,
-        apikey: String
+        images: {
+          type: Array,
+          value: []
+        }
       },
       listeners: {
         'dragover': 'cancel',
@@ -29,11 +46,9 @@
         'drop': 'drop'
       },
       ready: function() {
-        this.images = [{
+        this.push('images', {
           id: '15861376265'
-        }, {
-          id: '15860739362'
-        }];
+        });
       },
       cancel: function(e) {
         if (e.preventDefault) {
@@ -48,7 +63,11 @@
         }
         var s = e.dataTransfer.getData('Text');
         var re = /https:\/\/www.flickr.com\/photos\/([^\/]*)\/(\d*)/;
-        console.log(re.exec(s));
+        var flickrinfo = re.exec(s);
+        this.push('images', {
+          id: flickrinfo[2]
+        });
+        console.log(this.images);
       }
     });
   })();
