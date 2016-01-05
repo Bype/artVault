@@ -52,8 +52,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   }
   
-  paper-toolbar.gray {
-    --paper-toolbar-background: gray;
+  #artistname {
+    --paper-input-container-input: {
+      font-size: 150%;
+    }
+  }
+  
+  .pink {
+    color: var(--paper-pink-500)
+  }
+  
+  paper-button.green {
+    color: var(--paper-green-500);
+  }
+  
+  paper-button.orange {
+    color: var(--paper-orange-500);
   }
   </style>
 </head>
@@ -109,16 +123,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </section>
             <section data-route="newart">
               <paper-material elevation="1">
-                <h1>Ajouter une oeuvre</h1>
+                <div class="paper-font-headline pink">Ajouter une oeuvre au catalogue</div>
                 <form is="iron-form" id="artform" method="post" action="/form/newart">
-                  <exhibition-selector name="event" id="event"></exhibition-selector>
-                  <paper-input name="title" id="arttitle" required auto-validate error-message="champ obligatoire" label="Titre"></paper-input>
-                  <paper-textarea name="description" label="Dimensions, format, matérieaux, durée"></paper-textarea>
-                  <paper-typeahead-input id="pti" prefetch-url="http://localhost:3000/api/artists" max-suggestions="5" display-prop="name" searchable-props="{{searchable}}" is-candidates-json="true" placeholder="Artist"></paper-typeahead-input>
-                  <paper-input name="date" label="Année" style="width:4em" maxlength="4" auto-validate pattern="[0-9]*" error-message="Nombre"></paper-input>
+                  <exhibition-selector name="event" id="eventtitle"> </exhibition-selector>
+                  <paper-input name="title" id="arttitle" required auto-validate error-message="champ obligatoire" label="Titre">w</paper-input>
+                  <paper-typeahead-input id="artistname" prefetch-url="http://localhost:3000/api/artists" max-suggestions="5" display-prop="name" searchable-props="{{searchable}}" is-candidates-json="true" placeholder="Artiste"></paper-typeahead-input>
+                  <div class="horizontal layout">
+                    <paper-input name="date" label="Année" style="width:3em" maxlength="4" auto-validate pattern="[0-9]*" error-message="Nombre"></paper-input>
+                    <div>&nbsp;</div>
+                    <paper-input name="description" class="flex" label="Dimensions, format, matérieaux, durée"></paper-input>
+                  </div>
                   <paper-textarea name="content" label="Description"></paper-textarea>
+                  <div class="paper-font-subhead" style="margin-top:1em;">Medias</div>
                   <flickr-selector></flickr-selector>
+                  <flickr-square></flickr-square>
+                  <div class="horizontal layout end-justified" id="tags">
+                    <paper-button class="orange">Annuler</paper-button>
+                    <paper-button class="green">Enregistrer</paper-button>
+                  </div>
                 </form>
+                <tags-collection tags="{{ongoingtags}}"></tags-collection>
               </paper-material>
             </section>
           </iron-pages>

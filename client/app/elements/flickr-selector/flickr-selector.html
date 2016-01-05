@@ -1,5 +1,56 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
+<link rel="import" href="flickr-square.html">
 <dom-module id="flickr-selector">
-
+  <template>
+    <style>
+    :host {
+      display: block;
+      min-height: 150px;
+    }
+    </style>
+    <div class="horizontal layout">
+      <template is="dom-repeat" items="{{images}}">
+        <flickr-square flickrid={{item.id}}></flickr-square>
+      </template>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'flickr-selector',
+      properties: {
+        images: Array,
+        apikey: String
+      },
+      listeners: {
+        'dragover': 'cancel',
+        'dragenter': 'cancel',
+        'drop': 'drop'
+      },
+      ready: function() {
+        this.images = [{
+          id: '15861376265'
+        }, {
+          id: '15860739362'
+        }];
+      },
+      cancel: function(e) {
+        if (e.preventDefault) {
+          e.preventDefault();
+        } // required by FF + Safari
+        e.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
+        return false; // required by IE
+      },
+      drop: function(e) {
+        if (e.preventDefault) {
+          e.preventDefault();
+        }
+        var s = e.dataTransfer.getData('Text');
+        var re = /https:\/\/www.flickr.com\/photos\/([^\/]*)\/(\d*)/;
+        console.log(re.exec(s));
+      }
+    });
+  })();
+  </script>
 </dom-module>

@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="flickr-square">
+  <template>
+    <style>
+    :host {
+      display: block;
+      min-height:150px;
+    }
+    </style>
+    <iron-ajax auto url="https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key={{apikey}}&photo_id={{flickrid}}&format=json&nojsoncallback=1" handle-as="json" last-response="{{ajaxResponse}}">
+    </iron-ajax>
+    <iron-image src="{{getUrl(ajaxResponse)}}" style="width:150px; height:150px" preload sizing="cover">
+    </iron-image>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'flickr-square',
+      properties: {
+        flickrid: String,
+        apikey: String
+      },
+      ready: function() {
+        this.apikey = 'ca7454a3b5cac81a424bbd750f75131b';
+      },
+      getUrl: function(obj) {
+        return obj.sizes.size[1].source;
+      }
+    });
+  })();
+  </script>
+</dom-module>

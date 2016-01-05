@@ -5,6 +5,12 @@
     :host {
       display: block;
     }
+    
+    paper-dropdown-menu {
+      --paper-input-container-input: {
+        font-size: 120%;
+      }
+    }
     </style>
     <iron-ajax auto url="http://localhost:3000/api/events" params='{}' handle-as="json" last-response="{{ajaxResponse}}">
     </iron-ajax>

@@ -79,5 +79,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
 
   app.searchable = ['name'];
+  app.ongoingtags = [{
+    type: 'e',
+    tag: 'pan_automate',
+    name: 'Anatomie de l\'automate'
+  }, {
+    type: 'a',
+    tag: 'selma_lepart',
+    name: 'Selma Lepart'
+  }];
 
 })(document);
