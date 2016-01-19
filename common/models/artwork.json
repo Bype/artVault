@@ -20,6 +20,12 @@
       ],
       "required": true
     },
+    "productions": {
+      "type": [
+        "string"
+      ],
+      "required": false
+    },
     "date": {
       "type": "date",
       "required": true
