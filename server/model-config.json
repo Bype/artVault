@@ -43,5 +43,9 @@
   "artist": {
     "dataSource": "artvault",
     "public": true
+  },
+  "productions": {
+    "dataSource": "artvault",
+    "public": true
   }
 }
