@@ -10,9 +10,12 @@
       "type": "string",
       "required": true
     },
-    "description": {
+    "event": {
       "type": "string",
       "required": true
+    },
+    "description": {
+      "type": "string"
     },
     "artists": {
       "type": [
@@ -27,21 +30,13 @@
       "required": false
     },
     "date": {
-      "type": "date",
-      "required": true
+      "type": "string"
     },
     "content": {
       "type": "string"
     }
   },
   "validations": [],
-  "relations": {
-    "event": {
-      "type": "belongsTo",
-      "model": "event",
-      "foreignKey": "eventid"
-    }
-  },
   "acls": [],
   "methods": {}
 }
