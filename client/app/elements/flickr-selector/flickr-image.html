@@ -1,0 +1,38 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="flickr-image">
+  <template>
+    <style>
+    </style>
+    <iron-ajax auto url="https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key={{apikey}}&photo_id={{flickrid}}&format=json&nojsoncallback=1" handle-as="json" last-response="{{imageinfo}}" on-response="loaded">
+    </iron-ajax>
+    <iron-image src="{{url}}" style="width:320px; height:320px" sizing="cover">
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'flickr-image',
+      properties: {
+        flickrid: String,
+        apikey: String,
+        imageinfo: Object,
+        size: Number,
+        url: String
+      },
+      deleteMe: function() {
+        this.remove();
+      },
+      ready: function() {
+        this.apikey = 'ca7454a3b5cac81a424bbd750f75131b';
+      },
+      loaded: function() {
+        if (this.imageinfo.stat === 'ok') {
+          this.url = this.imageinfo.sizes.size[this.size].source;
+        } else {
+          this.url = 'http://placehold.it/320x100';
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

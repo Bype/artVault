@@ -37,14 +37,21 @@
       padding-left: 10px;
       font-family: Roboto;
     }
+    
+    paper-icon-button.overlay {
+      color: white;
+      left: -32px;
+      bottom: -120px
+    }
     </style>
     <div class="toolbar">
       <div class="title">Glisser / Déposer les images flickr ci-dessous</div>
     </div>
     <div class="drop-place layout horizontal">
       <template is="dom-repeat" items="{{images}}">
-        <flickr-square id="{{item}}" flickrid="{{item}}">
+        <flickr-square id="{{item}}" flickrid="{{item}}" on-click="promote">
         </flickr-square>
+        <paper-icon-button class="overlay" icon="delete" on-click="deleteMe"></paper-icon-button>
       </template>
     </div>
   </template>
@@ -61,8 +68,7 @@
         'dragenter': 'cancel',
         'drop': 'drop'
       },
-      ready: function() {
-      },
+      ready: function() {},
       cancel: function(e) {
         if (e.preventDefault) {
           e.preventDefault();
@@ -78,6 +84,19 @@
         var re = /https:\/\/www.flickr.com\/photos\/([^\/]*)\/(\d*)/;
         var flickrinfo = re.exec(s);
         this.push('images', flickrinfo[2]);
+      },
+      deleteMe: function(e) {
+        let i = this.images.indexOf(e.model.item);
+        if (-1 < i) {
+          this.splice('images', i, 1);
+        }
+      },
+      promote: function(e) {
+        let i = this.images.indexOf(e.model.item);
+        if (-1 < i) {
+          this.splice('images', i, 1);
+        }
+        this.unshift('images',e.model.item);
       }
     });
   })();

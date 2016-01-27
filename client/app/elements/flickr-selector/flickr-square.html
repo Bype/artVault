@@ -14,7 +14,6 @@
     <iron-ajax auto url="https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key={{apikey}}&photo_id={{flickrid}}&format=json&nojsoncallback=1" handle-as="json" last-response="{{ajaxResponse}}">
     </iron-ajax>
     <iron-image src="{{getUrl(ajaxResponse)}}" style="width:150px; height:150px" sizing="cover">
-      <paper-icon-button class="overlay" icon="delete" on-click="deleteMe"></paper-icon-button>
     </iron-image>
   </template>
   <script>
@@ -25,9 +24,6 @@
       properties: {
         flickrid: String,
         apikey: String
-      },
-      deleteMe: function() {
-        this.remove();
       },
       ready: function() {
         this.apikey = 'ca7454a3b5cac81a424bbd750f75131b';
