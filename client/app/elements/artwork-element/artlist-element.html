@@ -15,6 +15,16 @@
       }
     }
     </style>
+    <paper-dialog id="confirm" modal>
+      <p style="color:red">Attention !!</p>
+      <p>Vous allez supprimer une fiche oeuvre</p>
+      <div class="buttons">
+        <div class="buttons">
+          <paper-button dialog-dismiss autofocus>annuler</paper-button>
+          <paper-button dialog-confirm on-click='confirm'>Confirmer</paper-button>
+        </div>
+      </div>
+    </paper-dialog>
     <iron-ajax url="http://api.p4n.it/api/artworks" last-response="{{artworks}}" auto id="alquery"></iron-ajax>
     <template is="dom-repeat" items="[[artworks]]">
       <paper-card heading="[[item.title]]"><span>
@@ -53,10 +63,14 @@
         window.pages.select('artworkedit');
       },
       delete: function(e) {
-        this.$.awdelete.url = "http://api.p4n.it/api/artworks/" + e.model.item.id;
+        this.$.confirm.open();
+        this.confirm = function(){
+          this.$.awdelete.url = 'http://api.p4n.it/api/artworks/' + e.model.item.id;
+          this.refresh();
+        };
       },
       refresh:function(){
-      	this.$.alquery.generateRequest();
+        this.$.alquery.generateRequest();
       }
     });
   })();
