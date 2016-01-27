@@ -1,0 +1,114 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="artwork-element">
+  <template>
+    <style>
+    #arttitle {
+      --paper-input-container-input: {
+        font-size: 180%;
+        font-weight: bold;
+      }
+    }
+    </style>
+    <div class="paper-font-headline pink">Fiche Oeuvre</div>
+    <iron-ajax id="slajax" url="http://api.p4n.it/api/artworks" method="put" content-type="application/json" on-error="handleError" body="{{artpost}}"></iron-ajax>
+    <iron-ajax id="getart" url="http://api.p4n.it/api/artworks/{{artid}}" method="get" on-response="artLoaded" last-response="{{artcard}}"></iron-ajax>
+    <exhibition-selector name="exhibition" id="eventtitle" value="{{artcard.event}}"></exhibition-selector>
+    <paper-input name="title" id="arttitle" required auto-validate error-message="champ obligatoire" label="Titre" value="{{artcard.title}}"></paper-input>
+    <div class="horizontal layout">
+      <paper-input name="date" label="Année" style="width:5ex" value="{{artcard.date}}"></paper-input>
+      <div>&nbsp;</div>
+      <paper-input name="description" class="flex" label="Dimensions, format, matérieaux, durée" value="{{artcard.description}}"></paper-input>
+    </div>
+    <paper-textarea name="content" label="Description" value="{{artcard.content}}"></paper-textarea>
+    <br/>
+    <leather-editable-list id="artistslist" items="{{artcard.artists}}" heading="Artistes">
+      <template>
+        <span>{{value}}</span>
+      </template>
+      <paper-typeahead-input add-row no-label-float prefetch-url="http://api.p4n.it/api/artists" max-suggestions="5" display-prop="name" searchable-props="{{searchableartists}}" is-candidates-json="true" placeholder="Ajouter un artiste" value="toto"></paper-typeahead-input>
+    </leather-editable-list>
+    <br/>
+    <leather-editable-list items="{{artcard.productions}}" heading="Productions">
+      <template>
+        <span>{{value}}</span>
+      </template>
+      <paper-typeahead-input add-row no-label-float prefetch-url="http://api.p4n.it/api/productions" max-suggestions="5" display-prop="name" searchable-props="{{searchableproductions}}" is-candidates-json="true" placeholder="Ajouter un producteur"></paper-typeahead-input>
+    </leather-editable-list>
+    <br/>
+    <flickr-selector id="flickrsel" images="{{artcard.flickrs}}"></flickr-selector>
+    <br/>
+    <leather-editable-list default="" items="{{artcard.urls}}" heading="Liens">
+      <template>
+        <span>{{value}}</span>
+      </template>
+      <paper-input placeholder="http://" add-row no-label-float></paper-input>
+    </leather-editable-list>
+    <br/>
+    <div class="horizontal layout end-justified" id="tags">
+      <paper-button on-click="reset">Annuler</paper-button>
+      <paper-button on-click="save">Enregistrer</paper-button>
+    </div>
+    </form>
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()"></span>
+    </paper-toast>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'artwork-element',
+      properties: {
+        searchableartists: Array,
+        searchableproductions: Array,
+        artcard: Object,
+        artid: String,
+        artpost : String
+      },
+      ready: function() {
+        this.searchableartists = ['name'];
+        this.searchableproductions = ['name'];
+        this.artcard = {
+          title:"",
+          event:"",
+          date:2000,
+          description:"",
+          content:"",
+          artists: [],
+          productions: [],
+          urls: [],
+          flickrs: []
+        };
+      },
+      loadArt: function(artid) {
+        this.artid = artid;
+        this.$.getart.generateRequest();
+      },
+      artLoaded: function() {
+
+      },
+      getYear: function(d) {
+        return new Date(d).getFullYear();
+      },
+      save: function() {
+        this.artpost = this.artcard;
+        console.log(this.artpost);
+        this.$.slajax.generateRequest();
+        this.$.toast.textContent = this.artcard.title + 'a été enregistré';
+        this.$.toast.show();
+      },
+      handleError: function() {
+        this.$.toast.textContent = 'Erreur la fiche n\'a pas été sauvée';
+        this.$.toast.show();
+      },
+      reset: function() {
+        this.$.artform.reset();
+        this.artists = [];
+        this.productions = [];
+        this.urls = [];
+        this.flickrs = [];
+      }
+    });
+  })();
+  </script>
+</dom-module>

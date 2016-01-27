@@ -8,23 +8,42 @@
     }
     
     .drop-place {
-      border: 2px dashed grey;
       margin: auto;
       @apply(--layout-horizontal);
       @apply(--layout-wrap);
       min-height: 160px;
+      background: repeating-linear-gradient( 45deg, #dddddd, #dddddd 10px, #eeeeee 10px, #eeeeee 20px);
+      z-index: -1;
     }
+    
     flickr-square {
       margin: 5px 0 5px 5px;
       @apply(--layout-vertical);
       @apply(--layout-center);
       @apply(--layout-flex-1);
     }
+    
+    .toolbar {
+      display: flex;
+      align-items: center;
+      background-color: var(--dark-primary-color);
+      color: var(--text-primary-color);
+      padding: 5px;
+      min-height: 40px;
+    }
+    
+    .toolbar .title {
+      flex: 1;
+      padding-left: 10px;
+      font-family: Roboto;
+    }
     </style>
-    <p class="paper-font-subhead">Glisser / Déposer les images flickr ci-dessous</p>
+    <div class="toolbar">
+      <div class="title">Glisser / Déposer les images flickr ci-dessous</div>
+    </div>
     <div class="drop-place layout horizontal">
       <template is="dom-repeat" items="{{images}}">
-        <flickr-square id="{{item.id}}" flickrid="{{item.id}}">
+        <flickr-square id="{{item}}" flickrid="{{item}}">
         </flickr-square>
       </template>
     </div>
@@ -35,10 +54,7 @@
     Polymer({
       is: 'flickr-selector',
       properties: {
-        images: {
-          type: Array,
-          value: []
-        }
+        images: Array
       },
       listeners: {
         'dragover': 'cancel',
@@ -46,9 +62,6 @@
         'drop': 'drop'
       },
       ready: function() {
-        this.push('images', {
-          id: '15861376265'
-        });
       },
       cancel: function(e) {
         if (e.preventDefault) {
@@ -64,9 +77,7 @@
         var s = e.dataTransfer.getData('Text');
         var re = /https:\/\/www.flickr.com\/photos\/([^\/]*)\/(\d*)/;
         var flickrinfo = re.exec(s);
-        this.push('images', {
-          id: flickrinfo[2]
-        });
+        this.push('images', flickrinfo[2]);
       }
     });
   })();

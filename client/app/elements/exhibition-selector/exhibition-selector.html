@@ -17,7 +17,7 @@
     <paper-dropdown-menu label="Exposition">
       <paper-menu selected="{{value}}" attr-for-selected="value" class="dropdown-content">
         <template is="dom-repeat" items="[[ajaxResponse]]">
-          <paper-item value="{{item.id}}" role="menuitem">{{item.title}}</paper-item>
+          <paper-item value="{{item.title}}" role="menuitem">{{item.title}}</paper-item>
         </template>
       </paper-menu>
     </paper-dropdown-menu>
@@ -29,10 +29,12 @@
     Polymer({
       is: 'exhibition-selector',
       properties: {
-        value: String,
-        readOnly: true,
-        notify: true
-      }
+        value: {
+          type: String,
+          notify: true
+        }
+      },
+      ready: function() {}
     });
   })();
   </script>

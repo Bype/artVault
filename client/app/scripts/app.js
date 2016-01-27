@@ -77,13 +77,4 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.closeDrawer = function() {
     app.$.paperDrawerPanel.closeDrawer();
   };
-
-  app.searchable = ['name'];
-
-  app.ongoingtags = [{
-    type: 'e',
-    tag: 'pan_automate',
-    name: 'Anatomie de l\'automate'
-  }];
-
 })(document);

@@ -45,29 +45,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- endreplace-->
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles">
-  #arttitle {
-    --paper-input-container-input: {
-      font-size: 180%;
-      font-weight: bold;
+  paper-scroll-header-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--paper-grey-200, #eee);
+    /* background for toolbar when it is at its full size */
+    --paper-scroll-header-panel-full-header: {
+      background-image: url("https://farm1.staticflickr.com/673/22742635174_36b595bc55_k_d.jpg");
+      background-position: left center;
     }
-  }
-  
-  #artistname {
-    --paper-input-container-input: {
-      font-size: 150%;
+    ;
+    /* background for toolbar when it is condensed */
+    --paper-scroll-header-panel-condensed-header: {
+      background-color: var(--paper-grey-400);
     }
+    ;
   }
   
-  .pink {
-    color: var(--paper-pink-500)
+  paper-icon-button {
+    --paper-icon-button-ink-color: white;
   }
   
-  paper-button.green {
-    color: var(--paper-green-500);
+  paper-toolbar.tall {
+    background-color: transparent;
   }
   
-  paper-button.orange {
-    color: var(--paper-orange-500);
+  paper-toolbar.tall .title {
+    font-size: 40px;
+    margin-left: 60px;
+    -webkit-transform-origin: left center;
+    transform-origin: left center;
+  }
+  
+  .content {
+    padding: 8px;
+  }
+  
+  .spacer {
+    @apply(--layout-flex);
   }
   </style>
 </head>
@@ -88,11 +106,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <iron-icon icon="home"></iron-icon>
             <span>Acceuil</span>
           </a>
-          <a data-route="newart" href="/newart">
+          <a data-route="art" href="/art">
             <iron-icon icon="add-circle-outline"></iron-icon>
-            <span>Ajouter une oeuvre</span>
+            <span>Oeuvres</span>
           </a>
-          <a data-route="newart" href="/newart">
+          <a data-route="artist" href="/art/56a88a5209b981480e71fef9">
             <iron-icon icon="add-circle-outline"></iron-icon>
             <span>Ajouter un artiste</span>
           </a>
@@ -101,16 +119,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Main Area -->
       <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
         <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar" class="gray">
+        <paper-toolbar id="mainToolbar" class="tall">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
           <span class="flex"></span>
           <!-- Toolbar icons -->
           <paper-icon-button icon="search"></paper-icon-button>
           <!-- Application name -->
-          <div class="middle middle-container center horizontal layout">
-            <div class="app-name">Les archive de La Panacée</div>
-          </div>
-          <!-- Application sub title -->
+          <div class="bottom title">La Panacée - Le catalogue</div>
         </paper-toolbar>
         <!-- Main Content -->
         <div class="content">
@@ -121,31 +136,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
               </paper-material>
             </section>
-            <section data-route="newart">
+            <section data-route="art">
               <paper-material elevation="1">
-                <div class="paper-font-headline pink">Ajouter une oeuvre au catalogue</div>
-                <form is="iron-form" id="artform" method="post" action="/form/newart">
-                  <exhibition-selector name="event" id="eventtitle" value="test"> </exhibition-selector>
-                  <paper-input name="title" id="arttitle" required auto-validate error-message="champ obligatoire" label="Titre">w</paper-input>
-                  <paper-typeahead-input id="artistname" prefetch-url="http://api.p4n.it/api/artists" max-suggestions="5" display-prop="name" searchable-props="{{searchable}}" is-candidates-json="true" placeholder="Artiste"></paper-typeahead-input>
-                  <div class="horizontal layout">
-                    <paper-input name="date" label="Année" style="width:3em" maxlength="4" auto-validate pattern="[0-9]*" error-message="Nombre"></paper-input>
-                    <div>&nbsp;</div>
-                    <paper-input name="description" class="flex" label="Dimensions, format, matérieaux, durée"></paper-input>
-                  </div>
-                  <paper-textarea name="content" label="Description"></paper-textarea>
-                  <flickr-selector></flickr-selector>
-                  <div class="horizontal layout end-justified" id="tags">
-                    <paper-button class="orange">Annuler</paper-button>
-                    <paper-button class="green">Enregistrer</paper-button>
-                  </div>
-                </form>
+                <artwork-element id="artwork" artid></artwork-element>
               </paper-material>
             </section>
           </iron-pages>
         </div>
       </paper-scroll-header-panel>
     </paper-drawer-panel>
+
   </template>
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>

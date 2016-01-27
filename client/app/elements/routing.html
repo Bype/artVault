@@ -44,8 +44,13 @@ window.addEventListener('WebComponentsReady', function() {
     app.route = 'home';
   });
 
-  page('/newart', function() {
-    app.route = 'newart';
+  page('/art/:id', function(ctx) {
+    app.route = 'art';
+    app.$.artwork.loadArt(ctx.params.id);
+  });
+
+  page('/art', function() {
+    app.route = 'art';
   });
 
   // add #! before urls
