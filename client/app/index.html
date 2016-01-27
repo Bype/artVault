@@ -87,6 +87,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   .spacer {
     @apply(--layout-flex);
   }
+  
+  .arttitle {
+    font-size: 180%;
+    font-weight: bold;
+  }
   </style>
 </head>
 
@@ -106,13 +111,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <iron-icon icon="home"></iron-icon>
             <span>Acceuil</span>
           </a>
-          <a data-route="art" href="/art">
+          <a data-route="art" href="/artworkedit/">
             <iron-icon icon="add-circle-outline"></iron-icon>
-            <span>Oeuvres</span>
+            <span>Oeuvre</span>
           </a>
-          <a data-route="artist" href="/art/56a88a5209b981480e71fef9">
+          <a data-route="artist" href="/artworkedit/">
             <iron-icon icon="add-circle-outline"></iron-icon>
-            <span>Ajouter un artiste</span>
+            <span>Artiste</span>
           </a>
         </paper-menu>
       </paper-scroll-header-panel>
@@ -129,14 +134,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
         <!-- Main Content -->
         <div class="content">
-          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+          <iron-pages id="pages" attr-for-selected="data-route" selected="{{route}}">
             <section data-route="home">
-              <paper-material elevation="1">
-                <p class="paper-font-subhead">You now have:</p>
-                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
-              </paper-material>
+              <artlist-element id="artlist"></artlist-element>
             </section>
-            <section data-route="art">
+            <section data-route="artworkedit">
               <paper-material elevation="1">
                 <artwork-element id="artwork" artid></artwork-element>
               </paper-material>
@@ -145,7 +147,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
       </paper-scroll-header-panel>
     </paper-drawer-panel>
-
   </template>
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>

@@ -11,11 +11,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script>
 window.addEventListener('WebComponentsReady', function() {
 
-  // We use Page.js for routing. This is a Micro
-  // client-side router inspired by the Express router
-  // More info: https://visionmedia.github.io/page.js/
-
-  // Removes end / from app.baseUrl which page.base requires for production
   if (window.location.port === '') { // if production
     page.base(app.baseUrl.replace(/\/$/, ''));
   }
@@ -31,7 +26,6 @@ window.addEventListener('WebComponentsReady', function() {
     next();
   }
 
-  // Routes
   page('*', scrollToTop, closeDrawer, function(ctx, next) {
     next();
   });
@@ -44,16 +38,15 @@ window.addEventListener('WebComponentsReady', function() {
     app.route = 'home';
   });
 
-  page('/art/:id', function(ctx) {
-    app.route = 'art';
-    app.$.artwork.loadArt(ctx.params.id);
+  page('/artworkedit', function() {
+    app.route = 'artworkedit';
+    app.$.artwork.loadArt('');
   });
 
-  page('/art', function() {
-    app.route = 'art';
+  page('/artlist', function() {
+    app.route = 'artlist';
   });
 
-  // add #! before urls
   page({
     hashbang: true
   });
