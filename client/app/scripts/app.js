@@ -78,10 +78,4 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     app.$.paperDrawerPanel.closeDrawer();
   };
 
-  app.getFirst = array => {
-    if (array) {
-      return array[0];
-    }
-  };
-
 })(document);

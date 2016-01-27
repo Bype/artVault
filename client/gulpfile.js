@@ -23,6 +23,7 @@ var glob = require('glob-all');
 var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
+var gulpUtil = require('gulp-util');
 // var ghPages = require('gulp-gh-pages');
 
 var AUTOPREFIXER_BROWSERS = [
@@ -83,7 +84,7 @@ var optimizeHtmlTask = function(src, dest) {
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({
       preserveComments: 'some'
-    })))
+    }).on('error', gulpUtil.log)))
     // Concatenate and minify styles
     // In case you are still using useref build blocks
     .pipe($.if('*.css', $.minifyCss()))

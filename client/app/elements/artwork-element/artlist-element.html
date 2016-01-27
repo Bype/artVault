@@ -16,13 +16,11 @@
     }
     </style>
     <paper-dialog id="confirm" modal>
-      <p style="color:red">Attention !!</p>
+      <p>Attention !!</p>
       <p>Vous allez supprimer une fiche oeuvre</p>
       <div class="buttons">
-        <div class="buttons">
-          <paper-button dialog-dismiss autofocus>annuler</paper-button>
-          <paper-button dialog-confirm on-click='confirm'>Confirmer</paper-button>
-        </div>
+        <paper-button dialog-dismiss autofocus>annuler</paper-button>
+        <paper-button dialog-confirm on-click='confirm'>Confirmer</paper-button>
       </div>
     </paper-dialog>
     <iron-ajax url="http://api.p4n.it/api/artworks" last-response="{{artworks}}" auto id="alquery"></iron-ajax>
@@ -31,11 +29,6 @@
         <flickr-image flickrid="[[get(item.flickrs,0)]]" size=4></flickr-image>
         <div class="card-content">
           <b>[[item.artists]]</b>
-          <!--
-          <p><em>[[item.date]] - [[item.description]]</em></p>
-          <p><small>[[item.content]]</small></p>
-          <p>[[item.productions]]</p>
-          -->
         </div>
         <div class="card-actions">
         <small end-justified >[[item.event]]</small>
@@ -58,18 +51,18 @@
         return array[i];
       },
       edit: function(e) {
-        let id = e.model.item.id;
+        var id = e.model.item.id;
         app.$.artwork.loadArt(id);
         window.pages.select('artworkedit');
       },
       delete: function(e) {
         this.$.confirm.open();
-        this.confirm = function(){
+        this.confirm = function() {
           this.$.awdelete.url = 'http://api.p4n.it/api/artworks/' + e.model.item.id;
           this.refresh();
         };
       },
-      refresh:function(){
+      refresh: function() {
         this.$.alquery.generateRequest();
       }
     });
