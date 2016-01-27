@@ -7,12 +7,10 @@
   },
   "properties": {
     "title": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "event": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "description": {
       "type": "string"
@@ -20,14 +18,12 @@
     "artists": {
       "type": [
         "string"
-      ],
-      "required": true
+      ]
     },
     "productions": {
       "type": [
         "string"
-      ],
-      "required": false
+      ]
     },
     "date": {
       "type": "string"
