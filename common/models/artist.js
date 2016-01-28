@@ -10,6 +10,7 @@ module.exports = function(Artist) {
           name: name
         }, function() {
           cb(null, {
+            name: name,
             status: 'created'
           });
         });
