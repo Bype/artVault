@@ -33,6 +33,10 @@
       color: var(--secondary-text-color);
       text-decoration: none;
     }
+
+    paper-card{
+      background-color:white;
+    }
     </style>
     <iron-ajax auto id="getart" url="http://api.p4n.it/api/artworks/{{artid}}" method="get" last-response="{{artcard}}"></iron-ajax>
     <div class="container">
