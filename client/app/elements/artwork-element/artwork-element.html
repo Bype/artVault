@@ -12,6 +12,7 @@
     <div class="paper-font-headline pink">Fiche Oeuvre</div>
     <iron-ajax id="slajax" url="http://api.p4n.it/api/artworks" method="put" content-type="application/json" on-error="handleError" on-response="handleSuccess" body="{{artpost}}"></iron-ajax>
     <iron-ajax id="getart" url="http://api.p4n.it/api/artworks/{{artid}}" method="get" last-response="{{artcard}}"></iron-ajax>
+    <iron-ajax auto id="addartist" method="get" on-response="artistAdded"></iron-ajax>
     <exhibition-selector name="exhibition" id="eventtitle" value="{{artcard.event}}"></exhibition-selector>
     <paper-input name="title" id="arttitle" auto-validate label="Titre" value="{{artcard.title}}"></paper-input>
     <div class="horizontal layout">
@@ -21,7 +22,7 @@
     </div>
     <paper-textarea name="content" label="Description" value="{{artcard.content}}"></paper-textarea>
     <br/>
-    <leather-editable-list id="artistslist" items="{{artcard.artists}}" heading="Artistes">
+    <leather-editable-list on-add="addArtist" items="{{artcard.artists}}" heading="Artistes">
       <template>
         <span>{{value}}</span>
       </template>
@@ -32,7 +33,7 @@
       <template>
         <span>{{value}}</span>
       </template>
-      <paper-typeahead-input add-row no-label-float prefetch-url="http://api.p4n.it/api/productions" max-suggestions="5" display-prop="name" searchable-props="{{searchableproductions}}" is-candidates-json="true" placeholder="Ajouter un producteur"></paper-typeahead-input>
+      <paper-typeahead-input id="artistinput" add-row no-label-float prefetch-url="http://api.p4n.it/api/productions" max-suggestions="5" display-prop="name" searchable-props="{{searchableproductions}}" is-candidates-json="true" placeholder="Ajouter un producteur"></paper-typeahead-input>
     </leather-editable-list>
     <br/>
     <flickr-selector id="flickrsel" images="{{artcard.flickrs}}"></flickr-selector>
@@ -69,6 +70,16 @@
         this.searchableartists = ['name'];
         this.searchableproductions = ['name'];
         this.reset();
+      },
+      addArtist: function(v) {
+        this.$.addartist.url = 'http://api.p4n.it/api/artists/testadd?name=' + v.detail.value;
+      },
+      artistAdded: function(e) {
+        var res = e.detail.xhr.response.artist;
+        if (res.status === 'created') {
+          this.$.toast.textContent = 'Une fiche artiste a été créée pour ' + res.name;
+          this.$.toast.show();
+        }
       },
       loadArt: function(artid) {
         if (artid) {

@@ -86,15 +86,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   .spacer {
     @apply(--layout-flex);
   }
-  
-  .arttitle {
-    font-size: 180%;
-    font-weight: bold;
-  }
+
+
   </style>
 </head>
 
-<body unresolved class="fullbleed layout vertical">
+<body unresolved class="layout vertical">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
     <paper-drawer-panel id="paperDrawerPanel">
@@ -136,6 +133,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <iron-pages id="pages" attr-for-selected="data-route" selected="{{route}}">
             <section data-route="home">
               <artlist-element id="artlist"></artlist-element>
+            </section>
+            <section data-route="artworkinfo">
+              <paper-material elevation="1">
+                <artwork-info id="artinfo" artid></artwork-info>
+              </paper-material>
             </section>
             <section data-route="artworkedit">
               <paper-material elevation="1">

@@ -32,9 +32,7 @@
         </div>
         <div class="card-actions">
         <small end-justified >[[item.event]]</small>
-          <paper-icon-button icon="create" on-click="edit">
-            </a>
-          </paper-icon-button>
+          <paper-icon-button icon="create" on-click="edit"></paper-icon-button>
           <paper-icon-button icon="info" on-click="info"></paper-icon-button>
           <paper-icon-button icon="delete" on-click="delete"></paper-icon-button>
         </div>
@@ -54,6 +52,11 @@
         var id = e.model.item.id;
         app.$.artwork.loadArt(id);
         window.pages.select('artworkedit');
+      },
+      info: function(e) {
+        var id = e.model.item.id;
+        app.$.artinfo.artid = id;
+        window.pages.select('artworkinfo');
       },
       delete: function(e) {
         this.$.confirm.open();

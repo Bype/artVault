@@ -1,0 +1,84 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="artwork-info">
+  <template>
+    <style>
+    :host {
+      display: block;
+    }
+    
+    .container {
+      @apply(--layout-horizontal);
+    }
+    
+    .flexchild {
+      @apply(--layout-flex);
+    }
+    
+    .spacer {
+      @apply(--layout-flex);
+    }
+    
+    .imageplace {
+      margin: auto;
+      @apply(--layout-horizontal);
+      @apply(--layout-wrap);
+    }
+    
+    .img {
+      padding-right: 4px;
+      padding-bottom: 16px;
+    }
+    
+    a {
+      color: var(--secondary-text-color);
+      text-decoration: none;
+    }
+    </style>
+    <iron-ajax auto id="getart" url="http://api.p4n.it/api/artworks/{{artid}}" method="get" last-response="{{artcard}}"></iron-ajax>
+    <div class="container">
+      <div class="headline flexchild"><iron-icon icon="date-range"></iron-icon> {{artcard.event}}</div>
+      <div class="container paper-font-title">
+        <template is="dom-repeat" items="{{artcard.artists}}" as="item">
+         <iron-icon icon="perm-identity"></iron-icon><span>{{item}}</span>&nbsp;
+        </template>
+      </div>
+    </div>
+    <div class="imageplace">
+      <template is="dom-repeat" items="{{artcard.flickrs}}" as="item">
+        <a href="https://www.flickr.com/photos/137685274@N02/{{item}}" target="_blank">
+          <flickr-image class="img" flickrid="{{item}}" size=2></flickr-image>
+        </a>
+      </template>
+    </div>
+    <div class="container">
+      <div class="paper-font-display1 flexchild"><b>{{artcard.title}}</b></div>
+      <div class="paper-font-display1">{{artcard.date}}</div>
+    </div>
+    <div class="container paper-font-menu">{{artcard.description}}</div>
+    <template is="dom-repeat" items="{{artcard.productions}}" as="item">
+      <div class="paper-font-caption">{{item}}</div>
+    </template>
+    <br/>
+    <div class="paper-font-body1">{{artcard.content}}</div>
+    <br/>
+    <template is="dom-repeat" items="{{artcard.urls}}" as="item">
+      <div>
+        <iron-icon icon="link"></iron-icon><a target="_blank" href="{{item}}">{{item}}</a></div>
+    </template>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'artwork-info',
+      properties: {
+        artcard: Object,
+        artid: String
+      },
+      ready: function() {
+        this.artid = '56a8e4956c1b558c10fafa0c';
+      }
+    });
+  })();
+  </script>
+</dom-module>

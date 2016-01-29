@@ -2,10 +2,11 @@
 <dom-module id="flickr-image">
   <template>
     <style>
+
     </style>
     <iron-ajax auto url="https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key={{apikey}}&photo_id={{flickrid}}&format=json&nojsoncallback=1" handle-as="json" last-response="{{imageinfo}}" on-response="loaded">
     </iron-ajax>
-    <iron-image src="{{url}}" style="width:320px; height:320px" sizing="cover">
+    <iron-image id="img" src="{{url}}" sizing="cover">
   </template>
   <script>
   (function() {
@@ -26,8 +27,11 @@
         this.apikey = 'ca7454a3b5cac81a424bbd750f75131b';
       },
       loaded: function() {
+        var s = [75, 150, 100, 240, 320, 500, 640, 800, 1024, 1600];
         if (this.imageinfo.stat === 'ok') {
           this.url = this.imageinfo.sizes.size[this.size].source;
+          this.$.img.width = s[this.size];
+          this.$.img.height = s[this.size];
         } else {
           this.url = 'http://placehold.it/320x100';
         }

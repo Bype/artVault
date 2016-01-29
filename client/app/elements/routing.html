@@ -43,6 +43,10 @@ window.addEventListener('WebComponentsReady', function() {
     app.$.artwork.loadArt('');
   });
 
+  page('/artworkinfo', function() {
+    app.route = 'artworkinfo';
+  });
+
   page('/artlist', function() {
     app.route = 'artlist';
   });

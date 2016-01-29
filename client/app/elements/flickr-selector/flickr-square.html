@@ -6,10 +6,6 @@
       display: block;
       min-height: 150px;
     }
-    
-    paper-icon-button.overlay {
-      color: white;
-    }
     </style>
     <iron-ajax auto url="https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key={{apikey}}&photo_id={{flickrid}}&format=json&nojsoncallback=1" handle-as="json" last-response="{{ajaxResponse}}">
     </iron-ajax>

@@ -12,12 +12,12 @@
       @apply(--layout-horizontal);
       @apply(--layout-wrap);
       min-height: 160px;
-      background: repeating-linear-gradient( 45deg, #dddddd, #dddddd 10px, #eeeeee 10px, #eeeeee 20px);
+      background: var(--light-primary-color);
       z-index: -1;
     }
     
     flickr-square {
-      margin: 5px 0 5px 5px;
+      margin-bottom: 5px;
       @apply(--layout-vertical);
       @apply(--layout-center);
       @apply(--layout-flex-1);
@@ -38,10 +38,19 @@
       font-family: Roboto;
     }
     
-    paper-icon-button.overlay {
-      color: white;
-      left: -32px;
-      bottom: -120px
+    .image-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin-left:4px;
+      margin-top:4px;
+    }
+    
+    .image-container .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #FFF;
     }
     </style>
     <div class="toolbar">
@@ -49,9 +58,11 @@
     </div>
     <div class="drop-place layout horizontal">
       <template is="dom-repeat" items="{{images}}">
-        <flickr-square id="{{item}}" flickrid="{{item}}" on-click="promote">
-        </flickr-square>
-        <paper-icon-button class="overlay" icon="delete" on-click="deleteMe"></paper-icon-button>
+        <div class="image-container">
+          <flickr-square id="{{item}}" flickrid="{{item}}" on-click="promote">
+          </flickr-square>
+          <paper-icon-button class="overlay" icon="delete" on-click="deleteMe"></paper-icon-button>
+        </div>
       </template>
     </div>
   </template>
@@ -96,7 +107,7 @@
         if (-1 < i) {
           this.splice('images', i, 1);
         }
-        this.unshift('images',e.model.item);
+        this.unshift('images', e.model.item);
       }
     });
   })();
