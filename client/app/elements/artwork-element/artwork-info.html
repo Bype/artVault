@@ -43,13 +43,6 @@
         </template>
       </div>
     </div>
-    <div class="imageplace">
-      <template is="dom-repeat" items="{{artcard.flickrs}}" as="item">
-        <a href="https://www.flickr.com/photos/137685274@N02/{{item}}" target="_blank">
-          <flickr-image class="img" flickrid="{{item}}" size=2></flickr-image>
-        </a>
-      </template>
-    </div>
     <div class="container">
       <div class="paper-font-display1 flexchild"><b>{{artcard.title}}</b></div>
       <div class="paper-font-display1">{{artcard.date}}</div>
@@ -61,6 +54,14 @@
     <br/>
     <div class="paper-font-body1">{{artcard.content}}</div>
     <br/>
+<div class="imageplace">
+      <template is="dom-repeat" items="{{artcard.flickrs}}" as="item">
+        <a href="https://www.flickr.com/photos/137685274@N02/{{item}}" target="_blank">
+          <flickr-image class="img" flickrid="{{item}}" size=3></flickr-image>
+        </a>
+      </template>
+    </div>
+<br/>
     <template is="dom-repeat" items="{{artcard.urls}}" as="item">
       <div>
         <iron-icon icon="link"></iron-icon><a target="_blank" href="{{item}}">{{item}}</a></div>
