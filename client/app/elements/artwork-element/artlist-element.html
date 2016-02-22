@@ -27,14 +27,13 @@
     <iron-ajax url="http://api.p4n.it/api/artworks?filter=%7B%22order%22%3A%22id%20DESC%22%7D" last-response="{{artworks}}" auto id="alquery"></iron-ajax>
     <template is="dom-repeat" items="[[artworks]]">
       <paper-card heading="[[item.title]]"><span>
-        <flickr-image flickrid="[[get(item.flickrs,0)]]" size=4></flickr-image>
+        <flickr-image flickrid="[[get(item.flickrs,0)]]" size=4 on-click="info"></flickr-image>
         <div class="card-content">
           <b>[[item.artists]]</b>
         </div>
         <div class="card-actions">
         <small end-justified >[[item.event]]</small>
           <paper-icon-button icon="create" on-click="edit"></paper-icon-button>
-          <paper-icon-button icon="info" on-click="info"></paper-icon-button>
           <paper-icon-button icon="delete" on-click="delete"></paper-icon-button>
         </div>
       </paper-card>
