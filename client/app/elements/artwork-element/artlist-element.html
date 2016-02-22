@@ -24,7 +24,7 @@
         <paper-button dialog-confirm on-click='confirm'>Confirmer</paper-button>
       </div>
     </paper-dialog>
-    <iron-ajax url="http://api.p4n.it/api/artworks" last-response="{{artworks}}" auto id="alquery"></iron-ajax>
+    <iron-ajax url="http://api.p4n.it/api/artworks?filter=%7B%22order%22%3A%22id%20DESC%22%7D" last-response="{{artworks}}" auto id="alquery"></iron-ajax>
     <template is="dom-repeat" items="[[artworks]]">
       <paper-card heading="[[item.title]]"><span>
         <flickr-image flickrid="[[get(item.flickrs,0)]]" size=4></flickr-image>
