@@ -33,14 +33,14 @@
       color: var(--secondary-text-color);
       text-decoration: none;
     }
-
     </style>
     <iron-ajax auto id="getart" url="http://api.p4n.it/api/artworks/{{artid}}" method="get" last-response="{{artcard}}"></iron-ajax>
     <div class="container">
-      <div class="headline flexchild"><iron-icon icon="date-range"></iron-icon> {{artcard.event}}</div>
+      <div class="headline flexchild">
+        <iron-icon icon="date-range"></iron-icon> {{artcard.event}}</div>
       <div class="container paper-font-title">
         <template is="dom-repeat" items="{{artcard.artists}}" as="item">
-         <iron-icon icon="perm-identity"></iron-icon><span>{{item}}</span>&nbsp;
+          <iron-icon icon="perm-identity"></iron-icon><span>{{item}}</span>&nbsp;
         </template>
       </div>
     </div>
@@ -53,16 +53,16 @@
       <div class="paper-font-caption">{{item}}</div>
     </template>
     <br/>
-    <div class="paper-font-body1">{{artcard.content}}</div>
+    <div class="paper-font-body1" inner-h-t-m-l={{nl2br(artcard.content)}}></div>
     <br/>
-<div class="imageplace">
+    <div class="imageplace">
       <template is="dom-repeat" items="{{artcard.flickrs}}" as="item">
         <a href="https://www.flickr.com/photos/137685274@N02/{{item}}" target="_blank">
           <flickr-image class="img" flickrid="{{item}}" size=3></flickr-image>
         </a>
       </template>
     </div>
-<br/>
+    <br/>
     <template is="dom-repeat" items="{{artcard.urls}}" as="item">
       <div>
         <iron-icon icon="link"></iron-icon><a target="_blank" href="{{item}}">{{item}}</a></div>
@@ -79,6 +79,9 @@
       },
       ready: function() {
         this.artid = '56a8e4956c1b558c10fafa0c';
+      },
+      nl2br: function(txt) {
+        return txt.replace(/(?:\r\n|\r|\n)/g, '<br />');
       }
     });
   })();
