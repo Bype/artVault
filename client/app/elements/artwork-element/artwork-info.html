@@ -85,7 +85,7 @@
       nl2br: function(txt) {
         return txt.replace(/(?:\r\n|\r|\n)/g, '<br />');
       },
-      edit: function(e) {
+      edit: function() {
         app.$.artwork.loadArt(this.artid);
         window.pages.select('artworkedit');
       }
