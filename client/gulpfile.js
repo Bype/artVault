@@ -128,7 +128,8 @@ gulp.task('lint', function() {
   // JSCS has not yet a extract option
   .pipe($.if('*.html', $.htmlExtract()))
     .pipe($.jshint({
-      esnext: true
+      esnext: true,
+      indent: false
     }))
     .pipe($.jscs())
     .pipe($.jscsStylish.combineWithHintResults())

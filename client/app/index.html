@@ -86,8 +86,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   .spacer {
     @apply(--layout-flex);
   }
-
-
+  
+  paper-material {
+    height: auto;
+  }
   </style>
 </head>
 
@@ -120,7 +122,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <!-- Main Area -->
       <paper-scroll-header-panel main id="headerPanelMain" fixed>
         <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar" >
+        <paper-toolbar id="mainToolbar">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
           <span class="flex"></span>
           <!-- Toolbar icons -->
