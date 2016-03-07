@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="artist-element">
+  <template>
+    <style>
+    .headline {
+    	font-size:200%;
+    }
+    </style>
+    <div class="paper-font-headline">Fiche Artiste</div>
+    <div class="headline">
+      <b>{{name}}</b>
+    </div>
+  </template>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'artist-element',
+      properties: {
+        name: String
+      },
+      ready: function() {},
+      loadArtist: function(a) {
+        this.name = a;
+      }
+    });
+  })();
+  </script>
+</dom-module>

@@ -3,7 +3,7 @@
   <template>
     <style>
     :host {
-      display:block;
+      display: block;
     }
     
     .container {
@@ -40,7 +40,8 @@
         <iron-icon icon="date-range"></iron-icon> {{artcard.event}}</div>
       <div class="container paper-font-title">
         <template is="dom-repeat" items="{{artcard.artists}}" as="item">
-          <iron-icon icon="perm-identity"></iron-icon><span>{{item}}</span>&nbsp;
+          <a on-click="author" artist={{item}}>
+            <iron-icon icon="perm-identity"></iron-icon><span>{{item}}</span></a>&nbsp;
         </template>
       </div>
     </div>
@@ -88,6 +89,10 @@
       edit: function() {
         app.$.artwork.loadArt(this.artid);
         window.pages.select('artworkedit');
+      },
+      author: function(e) {
+        app.$.artist.loadArtist(e.model.item);
+        window.pages.select('artistedit');
       }
     });
   })();

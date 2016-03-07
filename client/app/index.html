@@ -113,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <iron-icon icon="add-circle-outline"></iron-icon>
             <span>Oeuvre</span>
           </a>
-          <a data-route="artist" href="/artworkedit/">
+          <a data-route="artist" href="/artistedit/">
             <iron-icon icon="add-circle-outline"></iron-icon>
             <span>Artiste</span>
           </a>
@@ -144,6 +144,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <section data-route="artworkedit">
               <paper-material elevation="1">
                 <artwork-element id="artwork" artid></artwork-element>
+              </paper-material>
+            </section>
+            <section data-route="artistedit">
+              <paper-material elevation="1">
+                <artist-element id="artist"></artist-element>
               </paper-material>
             </section>
           </iron-pages>

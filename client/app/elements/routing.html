@@ -43,6 +43,15 @@ window.addEventListener('WebComponentsReady', function() {
     app.$.artwork.loadArt('');
   });
 
+  page('/artistedit', function() {
+    app.route = 'artistedit';
+  });
+
+  page('/artistedit/:1', function(c) {
+    app.route = 'artistedit';
+    app.$.artist.loadArtist(c.params[1]);
+  });
+
   page('/artworkinfo', function() {
     app.route = 'artworkinfo';
   });
